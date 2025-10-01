@@ -21,36 +21,79 @@
 
                     <!--left Side-->
                     <ul class="navbar-nav">
+
+                        <!--Home-->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Disaster" asp-action="Index">Disaster</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Donation" asp-action="Index">Donation</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Donation" asp-action="List">Donation Records</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Volunteer" asp-action="Register">Volunteer Registration</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Volunteer" asp-action="Tasks">Browse Tasks</a>
-                        </li>
-                    </ul>
 
-                        <!--Right Side-->
+                        <!-- Disaster Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="disasterDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Disaster
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="disasterDropdown">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Disaster" asp-action="Index">Report Disaster</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Disaster" asp-action="CurrentDisaster">Current Disasters</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Donation Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="donationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Donation
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="donationDropdown">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Donation" asp-action="Index">Donation</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Donation" asp-action="List">Donation Records</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!--Volunteer-->
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="volunteerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Volunteer
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="volunteerDropdown">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Volunteer" asp-action="Register">Volunteer Registration</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Volunteer" asp-action="Tasks">Browse Tasks</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link text-dark" asp-controller="Volunteer" asp-action="Manage Volunteer">Manage Volunteer</a>
+                                </li>
+                            </ul>
+                          </li>
+                       </ul>
+
+                    <!-- Right Side -->
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="User" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="User" asp-action="Register">Register</a>
+                        <!-- Profile Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Profile
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="User" asp-action="Login">Login</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="User" asp-action="Register">Register</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </nav>

@@ -4,7 +4,7 @@ namespace APPR6312_POE.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -15,9 +15,6 @@ namespace APPR6312_POE.Models
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-
-        [Required]
-        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

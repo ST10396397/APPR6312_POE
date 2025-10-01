@@ -1,0 +1,38 @@
+﻿@model List<APPR6312_POE.Models.DisasterReport>
+
+@{
+    ViewData["Title"] = "Current Disasters";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No disaster reports available.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Contact Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var report in Model)
+            {
+                <tr>
+                    <td>@report.Title</td>
+                    <td>@report.Description</td>
+                    <td>@report.Location</td>
+                    <td>@report.IncidentDate.ToString("yyyy-MM-dd")</td>
+                    <td>@report.ContactPhone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

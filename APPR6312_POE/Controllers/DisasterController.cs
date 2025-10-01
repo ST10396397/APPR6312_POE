@@ -31,5 +31,10 @@ namespace APPR6312_POE.Controllers
         {
             return View();
         }
+
+        public IActionResult CurrentDisaster()
+        {
+            return View("CurrentDisaster");
+        }
     }
 }

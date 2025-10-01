@@ -21,8 +21,7 @@ namespace APPR6312_POE.Models
         [Display(Name = "Date of Donation")]
         public DateTime DonationDate { get; set; }
 
-        [Phone]
-        [Display(Name = "Contact Phone")]
-        public string ContactPhone { get; set; }
+        [Display(Name = "Location")]
+        public string Location { get; set; }
     }
 }
