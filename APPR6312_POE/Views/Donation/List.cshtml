@@ -1,0 +1,38 @@
+﻿@model IEnumerable<APPR6312_POE.Models.Donation>
+
+@{
+    ViewData["Title"] = "Donation Records";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <p>No donations have been made yet.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Donor Name</th>
+                <th>Resource Type</th>
+                <th>Quantity</th>
+                <th>Date</th>
+                <th>Contact Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var donation in Model)
+            {
+                <tr>
+                    <td>@donation.DonorName</td>
+                    <td>@donation.ResourceType</td>
+                    <td>@donation.Quantity</td>
+                    <td>@donation.DonationDate.ToShortDateString()</td>
+                    <td>@donation.ContactPhone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

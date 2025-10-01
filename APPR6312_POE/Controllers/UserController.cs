@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using APPR6312_POE.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace APPR6312_POE.Controllers
 {
@@ -24,10 +25,16 @@ namespace APPR6312_POE.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(string username, string email, string password)
+        public IActionResult Register(User newUser)
         {
-            // Handle registration logic here
-            return RedirectToAction("Login");
+            if (ModelState.IsValid)
+            {
+                // TODO: Save user to the database (add this later)
+                TempData["Message"] = "Registration successful!";
+                return RedirectToAction("Login");
+            }
+
+            return View(newUser);
         }
     }
 }

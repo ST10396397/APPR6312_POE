@@ -1,0 +1,35 @@
+﻿@model IEnumerable<APPR6312_POE.Models.VolunteerTask>
+
+@{
+    var volunteer = (APPR6312_POE.Models.Volunteer)ViewBag.Volunteer;
+    ViewData["Title"] = $"{volunteer.FullName}'s Assigned Tasks";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <p>You have not been assigned any tasks yet.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Description</th>
+                <th>Scheduled Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model)
+            {
+                <tr>
+                    <td>@task.Name</td>
+                    <td>@task.Description</td>
+                    <td>@task.ScheduledDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,6 +1,50 @@
-﻿@{
+﻿@model APPR6312_POE.Models.Donation
+
+ @{
     ViewData["Title"] = "Donation";
 }
-<div class="text-center">
-    <h1 class="display-4">Donation</h1>
-</div>
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Donate" method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label asp-for="DonorName" class="form-label"></label>
+        <input asp-for="DonorName" class="form-control" />
+        <span asp-validation-for="DonorName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ResourceType" class="form-label"></label>
+        <select asp-for="ResourceType" class="form-select">
+            <option value="">-- Select Resource Type --</option>
+            <option>Food</option>
+            <option>Clothing</option>
+            <option>Medical Supplies</option>
+            <option>Other</option>
+        </select>
+        <span asp-validation-for="ResourceType" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Quantity" class="form-label"></label>
+        <input asp-for="Quantity" type="number" class="form-control" min="1" />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DonationDate" class="form-label"></label>
+        <input asp-for="DonationDate" type="date" class="form-control" />
+        <span asp-validation-for="DonationDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ContactPhone" class="form-label"></label>
+        <input asp-for="ContactPhone" class="form-control" />
+        <span asp-validation-for="ContactPhone" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Donation</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

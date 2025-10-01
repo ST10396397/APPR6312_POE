@@ -1,6 +1,44 @@
-﻿@{
-    ViewData["Title"] = "Disaster";
+﻿@model APPR6312_POE.Models.DisasterReport
+@{
+    ViewData["Title"] = "Disaster Page";
 }
-<div class="text-center">
-    <h1 class="display-4">Disaster</h1>
-</div>
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Report" method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Location" class="form-label"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="IncidentDate" class="form-label"></label>
+        <input asp-for="IncidentDate" type="date" class="form-control" />
+        <span asp-validation-for="IncidentDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ContactPhone" class="form-label"></label>
+        <input asp-for="ContactPhone" class="form-control" />
+        <span asp-validation-for="ContactPhone" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Report</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
