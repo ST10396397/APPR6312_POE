@@ -4,16 +4,19 @@ namespace APPR6312_POE.Models
 {
     public class DisasterReport
     {
+        [Key]  // Marks as Primary Key
+        public int ReportId { get; set; }  // match DB column
+
         [Required]
         [Display(Name = "Incident Title")]
         public string Title { get; set; }
 
         [Required]
         [DataType(DataType.MultilineText)]
-        public string Description { get; set; }
+        public string DisasterDescription { get; set; }
 
         [Required]
-        public string Location { get; set; }
+        public string DisasterLocation { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

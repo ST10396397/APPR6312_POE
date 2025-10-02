@@ -4,6 +4,9 @@ namespace APPR6312_POE.Models
 {
     public class Donation
     {
+        [Key]  // Primary Key
+        public int DonationId { get; set; }
+
         [Required]
         [Display(Name = "Donor Name")]
         public string DonorName { get; set; }
@@ -22,6 +25,6 @@ namespace APPR6312_POE.Models
         public DateTime DonationDate { get; set; }
 
         [Display(Name = "Location")]
-        public string Location { get; set; }
+        public string DonationLocation { get; set; }
     }
 }

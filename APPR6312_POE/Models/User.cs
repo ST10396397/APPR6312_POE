@@ -4,10 +4,11 @@ namespace APPR6312_POE.Models
 {
     public class User
     {
+        [Key]  // Primary Key
         public int UserId { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }  
 
         [Required]
         public string Surname { get; set; }
@@ -17,8 +18,7 @@ namespace APPR6312_POE.Models
         public string Email { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string HashedPassword { get; set; } 
     }
 }
 

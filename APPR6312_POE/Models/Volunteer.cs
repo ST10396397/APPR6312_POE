@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace APPR6312_POE.Models
 {
-    public class Volunteer : Controller
+    public class Volunteer
     {
-        public int Id { get; set; }  // Unique volunteer ID
+        public int VolunteerId { get; set; }  // match DB column
 
         [Required]
         [Display(Name = "Full Name")]
@@ -24,4 +24,5 @@ namespace APPR6312_POE.Models
         public DateTime RegistrationDate { get; set; } = DateTime.Now;
     }
 }
+
 

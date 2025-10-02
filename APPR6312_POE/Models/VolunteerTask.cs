@@ -3,16 +3,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace APPR6312_POE.Models
 {
-    public class VolunteerTask : Controller
+    public class VolunteerTask
     {
-        public int Id { get; set; }  // Unique task ID
+        [Key]  // Primary Key
+        public int TaskId { get; set; }  // match DB column
 
         [Required]
         [Display(Name = "Task Name")]
-        public string Name { get; set; }
+        public string TaskName { get; set; }
 
         [Display(Name = "Description")]
-        public string Description { get; set; }
+        public string TaskDescription { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Scheduled Date")]

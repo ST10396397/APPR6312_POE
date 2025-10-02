@@ -1,10 +1,19 @@
 ﻿using APPR6312_POE.Models;
 using Microsoft.AspNetCore.Mvc;
+using APPR6312_POE.Data;
 
 namespace APPR6312_POE.Controllers
 {
     public class DisasterController : Controller
     {
+        private readonly AppDbContext _context;
+
+        public DisasterController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: /Disaster/
         public IActionResult Index()
         {
             return View("Disaster");
@@ -17,24 +26,30 @@ namespace APPR6312_POE.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: Save the report to database or send an email, etc.
-                // For now, just display a Thank You page.
+                _context.DisasterReports.Add(model);
+                _context.SaveChanges();
 
                 return RedirectToAction("ThankYou");
             }
 
-            // If validation failed, redisplay the form with errors
-            return View(model);
+            // If validation failed, redisplay form
+            return View("Disaster", model);
         }
 
+        // GET: /Disaster/ThankYou
         public IActionResult ThankYou()
         {
             return View();
         }
 
+        // GET: /Disaster/CurrentDisaster
         public IActionResult CurrentDisaster()
         {
-            return View("CurrentDisaster");
+            var disasters = _context.DisasterReports
+                .OrderByDescending(d => d.IncidentDate)
+                .ToList();
+
+            return View(disasters); // you’ll need a list view
         }
     }
 }

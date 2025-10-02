@@ -1,13 +1,19 @@
 ﻿using APPR6312_POE.Models;
 using Microsoft.AspNetCore.Mvc;
+using APPR6312_POE.Data;
 
 namespace APPR6312_POE.Controllers
 {
     public class DonationController : Controller
     {
-        // In-memory donation list (static for demo)
-        private static List<Donation> _donations = new List<Donation>();
+        private readonly AppDbContext _context;
 
+        public DonationController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: /Donation/
         public IActionResult Index()
         {
             return View("Donation");
@@ -20,17 +26,23 @@ namespace APPR6312_POE.Controllers
         {
             if (ModelState.IsValid)
             {
-                _donations.Add(model);
+                _context.Donations.Add(model);
+                _context.SaveChanges();
+
                 return RedirectToAction("ThankYou");
             }
 
-            return View(model);
+            return View("Donation", model);
         }
 
         // GET: /Donation/List
         public IActionResult List()
         {
-            return View(_donations);
+            var donations = _context.Donations
+                .OrderByDescending(d => d.DonationDate)
+                .ToList();
+
+            return View(donations);
         }
 
         // GET: /Donation/ThankYou

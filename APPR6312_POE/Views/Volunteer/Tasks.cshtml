@@ -6,7 +6,7 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<table class="table">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Task</th>
@@ -20,14 +20,20 @@
         @foreach (var task in Model)
         {
             <tr>
-                <td>@task.Name</td>
-                <td>@task.Description</td>
+                <td>@task.TaskName</td>
+                <td>@task.TaskDescription</td>
                 <td>@task.ScheduledDate.ToShortDateString()</td>
                 <td>@(task.IsAssigned ? "Assigned" : "Available")</td>
                 <td>
                     @if (!task.IsAssigned)
                     {
-                        <a asp-action="Assign" asp-route-volunteerId="1" asp-route-taskId="@task.Id" class="btn btn-sm btn-success">Assign to Me</a>
+                        <!-- Replace 1 with actual logged-in volunteerId later -->
+                        <a asp-action="Assign"
+                           asp-route-volunteerId="1"
+                           asp-route-taskId="@task.TaskId"
+                           class="btn btn-sm btn-success">
+                            Assign to Me
+                        </a>
                     }
                     else
                     {
