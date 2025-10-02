@@ -1,7 +1,8 @@
-﻿using APPR6312_POE.Models;
+﻿using APPR6312_POE.Data;
+using APPR6312_POE.Models;
 using Microsoft.AspNetCore.Mvc;
-using APPR6312_POE.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace APPR6312_POE.Controllers
 {
@@ -46,31 +47,35 @@ namespace APPR6312_POE.Controllers
         }
 
         // GET: /Volunteer/Tasks
-        public IActionResult Tasks()
+        public IActionResult Tasks(int volunteerId)
         {
-            var tasks = _context.VolunteerTasks.ToList();
+            var tasks = _context.VolunteerTasks
+        .Select(t => new TaskWithStatus
+        {
+            Task = t,
+            IsAssigned = _context.VolunteerTaskAssignments.Any(a => a.TaskId == t.TaskId)
+        })
+        .ToList();
+
+            ViewBag.VolunteerId = volunteerId; // Pass current user ID to view
             return View(tasks);
         }
 
         // GET: /Volunteer/Assign/{volunteerId}/{taskId}
-        public IActionResult Assign(int volunteerId, int taskId)
+        [HttpPost]
+        public IActionResult Assign(int taskId, int volunteerId)
         {
-            var volunteer = _context.Volunteers.Find(volunteerId);
-            var task = _context.VolunteerTasks.Find(taskId);
-
-            if (volunteer == null || task == null || task.IsAssigned)
-                return BadRequest("Invalid volunteer or task or task already assigned.");
-
-            task.IsAssigned = true;
-            _context.VolunteerTaskAssignments.Add(new VolunteerTaskAssignment
+            var assignment = new VolunteerTaskAssignment
             {
+                TaskId = taskId,
                 VolunteerId = volunteerId,
-                TaskId = taskId
-            });
+                AssignedDate = DateTime.Now
+            };
 
+            _context.VolunteerTaskAssignments.Add(assignment);
             _context.SaveChanges();
 
-            return RedirectToAction("MyTasks", new { volunteerId });
+            return RedirectToAction("Tasks", new { volunteerId = volunteerId });
         }
 
         // GET: /Volunteer/MyTasks/{volunteerId}
@@ -109,6 +114,20 @@ namespace APPR6312_POE.Controllers
             var tasks = _context.VolunteerTasks.ToList();
             ViewBag.NewTask = model;
             return View("Tasks", tasks);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteTask(int taskId, int volunteerId)
+        {
+            var task = _context.VolunteerTasks.FirstOrDefault(t => t.TaskId == taskId);
+            if (task != null)
+            {
+                _context.VolunteerTasks.Remove(task);
+                _context.SaveChanges();
+            }
+
+            // Redirect back to Tasks with the volunteerId so the page reloads correctly
+            return RedirectToAction("Tasks", new { volunteerId = volunteerId });
         }
     }
 }
