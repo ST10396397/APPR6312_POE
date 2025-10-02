@@ -93,5 +93,22 @@ namespace APPR6312_POE.Controllers
         {
             return View("Volunteer");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateTask(VolunteerTask model)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.VolunteerTasks.Add(model);
+                _context.SaveChanges();
+                return RedirectToAction("Tasks");
+            }
+
+            // If validation fails, reload the page with tasks
+            var tasks = _context.VolunteerTasks.ToList();
+            ViewBag.NewTask = model;
+            return View("Tasks", tasks);
+        }
     }
 }

@@ -6,6 +6,30 @@
 
 <h2>@ViewData["Title"]</h2>
 
+<!-- Create Task Form -->
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">Create New Task</div>
+    <div class="card-body">
+        <form asp-action="CreateTask" method="post">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">Task Name</label>
+                    <input name="TaskName" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Description</label>
+                    <input name="TaskDescription" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Scheduled Date</label>
+                    <input name="ScheduledDate" type="date" class="form-control" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Add Task</button>
+        </form>
+    </div>
+</div>
+
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
