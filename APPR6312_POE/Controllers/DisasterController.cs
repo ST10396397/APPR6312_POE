@@ -49,7 +49,7 @@ namespace APPR6312_POE.Controllers
                 .OrderByDescending(d => d.IncidentDate)
                 .ToList();
 
-            return View(disasters); // you’ll need a list view
+            return View(disasters); 
         }
     }
 }

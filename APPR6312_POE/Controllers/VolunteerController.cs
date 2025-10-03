@@ -15,14 +15,14 @@ namespace APPR6312_POE.Controllers
             _context = context;
         }
 
-        // GET: /Volunteer/Register
+        // volunteer registration
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        // POST: /Volunteer/Register
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Register(Volunteer model)
@@ -37,7 +37,7 @@ namespace APPR6312_POE.Controllers
             return View(model);
         }
 
-        // GET: /Volunteer/ThankYou/{volunteerId}
+        // volunteer thank you page
         public IActionResult ThankYou(int volunteerId)
         {
             var volunteer = _context.Volunteers.FirstOrDefault(v => v.VolunteerId == volunteerId);
@@ -46,7 +46,7 @@ namespace APPR6312_POE.Controllers
             return View(volunteer);
         }
 
-        // GET: /Volunteer/Tasks
+        // volunteer task listing
         public IActionResult Tasks(int volunteerId)
         {
             var tasks = _context.VolunteerTasks
@@ -61,7 +61,7 @@ namespace APPR6312_POE.Controllers
             return View(tasks);
         }
 
-        // GET: /Volunteer/Assign/{volunteerId}/{taskId}
+        // volunteer task assignment
         [HttpPost]
         public IActionResult Assign(int taskId, int volunteerId)
         {
@@ -78,7 +78,7 @@ namespace APPR6312_POE.Controllers
             return RedirectToAction("Tasks", new { volunteerId = volunteerId });
         }
 
-        // GET: /Volunteer/MyTasks/{volunteerId}
+        // volunteer my tasks view
         public IActionResult MyTasks(int volunteerId)
         {
             var volunteer = _context.Volunteers.Find(volunteerId);
@@ -128,6 +128,27 @@ namespace APPR6312_POE.Controllers
 
             // Redirect back to Tasks with the volunteerId so the page reloads correctly
             return RedirectToAction("Tasks", new { volunteerId = volunteerId });
+        }
+
+        // Show list of volunteers
+        public IActionResult ManageVolunteers()
+        {
+            var volunteers = _context.Volunteers.ToList(); // assuming your model is Volunteers
+            return View(volunteers);
+        }
+
+        // Delete a volunteer
+        [HttpPost]
+        public IActionResult DeleteVolunteer(int volunteerId)
+        {
+            var volunteer = _context.Volunteers.FirstOrDefault(v => v.VolunteerId == volunteerId);
+            if (volunteer != null)
+            {
+                _context.Volunteers.Remove(volunteer);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("ManageVolunteers");
         }
     }
 }

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<APPR6312_POE.Models.Volunteer>
+
+@{
+    ViewData["Title"] = "Volunteer Management";
+}
+
+<h2>Volunteer Management</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Volunteer ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var v in Model)
+        {
+            <tr>
+                <td>@v.VolunteerId</td>
+                <td>@v.FullName</td>
+                <td>@v.Email</td>
+                <td>@v.PhoneNumber</td>
+                <td>
+                    <form asp-action="DeleteVolunteer" method="post" style="display:inline;">
+                        <input type="hidden" name="volunteerId" value="@v.VolunteerId" />
+                        <button type="submit" class="btn btn-sm btn-danger"
+                                onclick="return confirm('Are you sure you want to delete this volunteer?');">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

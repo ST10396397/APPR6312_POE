@@ -12,10 +12,12 @@ namespace APPR6312_POE.Models
         public string Title { get; set; }
 
         [Required]
+        [Display(Name = "Description of Incident")]
         [DataType(DataType.MultilineText)]
         public string DisasterDescription { get; set; }
 
         [Required]
+        [Display(Name = "Location of Incident")]
         public string DisasterLocation { get; set; }
 
         [Required]
@@ -24,7 +26,7 @@ namespace APPR6312_POE.Models
         public DateTime IncidentDate { get; set; }
 
         [Phone]
-        [Display(Name = "Contact Phone (Optional)")]
+        [Display(Name = "Contact Phone")]
         public string ContactPhone { get; set; }
     }
 }
